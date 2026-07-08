@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"npm run lint 2>&1\",\"timeout\":60000,\"description\":\"Test ESLint after moving eslint-disable\"}",
+  "error": "Exit code 1\n\n> recipe-cost-calculator@0.1.0 lint\n> eslint .\n\n\n/Users/hongpaul/develop/project-persnol/claude-auto-idea/projects/recipe-cost-calculator/src/lib/utils/errors.ts\n   5:1   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-unused-vars')\n   8:12  error    'code' is defined but never used                                                                      no-unused-vars\n  10:12  error    'statusCode' is assigned a value but never used      ...",
+  "timestamp": "2026-07-08T14:11:29.672Z",
+  "retry_count": 4
+}
