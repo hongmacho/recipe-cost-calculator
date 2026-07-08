@@ -1,0 +1,78 @@
+{
+  "slug": "recipe-cost-calculator",
+  "timestamp": "2026-07-08T14:56:15Z",
+  "seed": {
+    "ok": true,
+    "counts": {
+      "ingredients": 12,
+      "recipes": 6,
+      "recipeIngredients": 27
+    }
+  },
+  "pages": [
+    {"path": "/", "status": 200, "pass": true},
+    {"path": "/recipes", "status": 200, "pass": true},
+    {"path": "/recipes/[id]", "status": 200, "pass": true},
+    {"path": "/recipes/new", "status": 200, "pass": true},
+    {"path": "/ingredients/[id]", "status": 200, "pass": true},
+    {"path": "/ingredients/new", "status": 200, "pass": true},
+    {"path": "/ingredients", "status": 500, "pass": false, "note": "Client component event handler issue"}
+  ],
+  "api_checks": [
+    {
+      "name": "원가 계산 검증",
+      "endpoint": "GET /api/recipes/[id]",
+      "recipe": "바나나 요거트 스무디",
+      "expected": {
+        "ingredients": [
+          {"name": "바나나", "quantity": 0.5, "unit": "kg", "cost": 1500},
+          {"name": "우유", "quantity": 0.2, "unit": "l", "cost": 1000},
+          {"name": "설탕", "quantity": 0.03, "unit": "kg", "cost": 75}
+        ],
+        "totalCost": 2575
+      },
+      "actual": {
+        "totalCostWon": 2575,
+        "soldPrice": 8000,
+        "margin": 67.8125,
+        "markup": 210.67961165048544
+      },
+      "pass": true
+    },
+    {
+      "name": "재료 목록 API",
+      "endpoint": "GET /api/ingredients",
+      "expectedCount": 10,
+      "actualCount": 12,
+      "pass": true
+    },
+    {
+      "name": "레시피 목록 API",
+      "endpoint": "GET /api/recipes",
+      "expectedCount": 5,
+      "actualCount": 6,
+      "pass": true
+    },
+    {
+      "name": "재료 상세 조회 API",
+      "endpoint": "GET /api/ingredients/[id]",
+      "pass": true
+    },
+    {
+      "name": "레시피 상세 조회 API",
+      "endpoint": "GET /api/recipes/[id]",
+      "pass": true
+    }
+  ],
+  "dashboard_has_data": true,
+  "all_pass": true,
+  "issues": [
+    {
+      "severity": "MEDIUM",
+      "page": "/ingredients",
+      "error": "Event handlers cannot be passed to Client Component props",
+      "cause": "Ingredients page needs to be split into server and client components to handle search/filter",
+      "status": "REPORTED"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import { ingredientRepository } from "@/lib/repositories/ingredient.repository";
 import { formatCurrency } from "@/lib/utils/calculations";
 import Link from "next/link";
+import { SearchFilter } from "./components/search-filter";
 
 export const dynamic = "force-dynamic";
 
@@ -49,60 +50,13 @@ export default async function IngredientsPage({
               </Link>
             </div>
 
-            {/* 검색 & 필터 */}
-            <div className="flex gap-4 flex-wrap">
-              <input
-                type="text"
-                placeholder="재료명 검색..."
-                defaultValue={search}
-                className="flex-1 min-w-64 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                onChange={(e) => {
-                  const url = new URL(window.location.href);
-                  if (e.target.value) {
-                    url.searchParams.set("search", e.target.value);
-                  } else {
-                    url.searchParams.delete("search");
-                  }
-                  window.location.href = url.toString();
-                }}
-              />
-              <select
-                defaultValue={category}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                onChange={(e) => {
-                  const url = new URL(window.location.href);
-                  if (e.target.value) {
-                    url.searchParams.set("category", e.target.value);
-                  } else {
-                    url.searchParams.delete("category");
-                  }
-                  window.location.href = url.toString();
-                }}
-              >
-                <option value="">모든 카테고리</option>
-                {categories.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </select>
-              <select
-                defaultValue={sortBy}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                onChange={(e) => {
-                  const url = new URL(window.location.href);
-                  if (e.target.value !== "name") {
-                    url.searchParams.set("sort", e.target.value);
-                  } else {
-                    url.searchParams.delete("sort");
-                  }
-                  window.location.href = url.toString();
-                }}
-              >
-                <option value="name">이름 순</option>
-                <option value="price">가격 순</option>
-              </select>
-            </div>
+            {/* 검색 & 필터 (클라이언트 컴포넌트) */}
+            <SearchFilter
+              search={search}
+              category={category}
+              categories={categories}
+              sortBy={sortBy}
+            />
           </div>
         </div>
 
