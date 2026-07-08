@@ -47,3 +47,11 @@ next-env.d.ts
 
 # local env
 .env.local
+
+# database
+*.db
+*.sqlite
+*.db-journal
+
+# omc state
+.omc/
