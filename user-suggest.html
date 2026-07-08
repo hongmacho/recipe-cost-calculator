@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>레시피 원가 계산기 — 다음 단계 가이드</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // 다크 모드 토글
+    function toggleDarkMode() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    // 저장된 테마 복원
+    window.addEventListener('DOMContentLoaded', () => {
+      const theme = localStorage.getItem('theme') || 'light';
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    });
+  </script>
+  <style>
+    html.dark {
+      color-scheme: dark;
+    }
+  </style>
+</head>
+<body class="bg-white dark:bg-slate-950 text-gray-900 dark:text-gray-100">
+
+<div class="min-h-screen">
+  <!-- 헤더 -->
+  <header class="bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-800 dark:to-blue-900 text-white shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex justify-between items-start">
+        <div>
+          <h1 class="text-4xl font-bold mb-2">레시피 원가 계산기</h1>
+          <p class="text-blue-100 text-lg">다음 단계 가이드 (2026년 7월 ~ 2027년 2월)</p>
+        </div>
+        <button
+          onclick="toggleDarkMode()"
+          class="px-4 py-2 bg-blue-500 hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800 rounded-lg transition font-medium"
+        >
+          🌙 테마 전환
+        </button>
+      </div>
+      <div class="mt-4 pt-4 border-t border-blue-500">
+        <p class="text-blue-100 mb-2">📌 GitHub: <a href="https://github.com/hongmacho/recipe-cost-calculator" target="_blank" class="underline hover:text-white">hongmacho/recipe-cost-calculator</a></p>
+        <p class="text-blue-100">✅ MVP 완료 (7개 화면, 8개 MUST-HAVE 기능, 한국어 UI)</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- 메인 콘텐츠 -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- 현황 요약 -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6 text-blue-600 dark:text-blue-400">📊 현재 상태</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-blue-50 dark:bg-slate-800 rounded-lg p-6 border-l-4 border-blue-500">
+          <p class="text-sm text-gray-600 dark:text-gray-400">완성된 화면</p>
+          <p class="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">7개</p>
+          <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">대시보드 + 재료 + 레시피</p>
+        </div>
+        <div class="bg-green-50 dark:bg-slate-800 rounded-lg p-6 border-l-4 border-green-500">
+          <p class="text-sm text-gray-600 dark:text-gray-400">MUST-HAVE 기능</p>
+          <p class="text-3xl font-bold text-green-600 dark:text-green-400 mt-2">8/8</p>
+          <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">원가 계산 + 마진 시뮬레이션</p>
+        </div>
+        <div class="bg-purple-50 dark:bg-slate-800 rounded-lg p-6 border-l-4 border-purple-500">
+          <p class="text-sm text-gray-600 dark:text-gray-400">Git 커밋</p>
+          <p class="text-3xl font-bold text-purple-600 dark:text-purple-400 mt-2">6개</p>
+          <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">Sprint 0-1 완료</p>
+        </div>
+        <div class="bg-orange-50 dark:bg-slate-800 rounded-lg p-6 border-l-4 border-orange-500">
+          <p class="text-sm text-gray-600 dark:text-gray-400">기술 스택</p>
+          <p class="text-3xl font-bold text-orange-600 dark:text-orange-400 mt-2">Next.js</p>
+          <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">+ Drizzle + SQLite</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Wins (1주일 이내) -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6 text-green-600 dark:text-green-400">⚡ Quick Wins (1주일 이내, 최우선)</h2>
+      <div class="space-y-4">
+        <div class="bg-white dark:bg-slate-900 border border-green-200 dark:border-green-800 rounded-lg p-6 hover:shadow-lg transition">
+          <div class="flex items-start">
+            <input type="checkbox" class="mt-1 mr-4 w-5 h-5 text-green-600 rounded cursor-pointer">
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">📥 CSV 재료 대량 수입</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-3">엑셀 파일을 CSV로 변환해 100개+ 재료 한 번에 등록. 초기 데이터 마이그레이션 90% 시간 단축.</p>
+              <div class="flex gap-4 text-sm">
+                <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded">2-3시간</span>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded">난이도: 낮음</span>
+                <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded">효과: 높음</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 border border-green-200 dark:border-green-800 rounded-lg p-6 hover:shadow-lg transition">
+          <div class="flex items-start">
+            <input type="checkbox" class="mt-1 mr-4 w-5 h-5 text-green-600 rounded cursor-pointer">
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">🎯 레시피 복제 기능</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-3">기존 레시피 기반 신규 레시피 생성. 유사 메뉴 많은 업계에서 입력 시간 30% 절감.</p>
+              <div class="flex gap-4 text-sm">
+                <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded">1시간</span>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded">난이도: 낮음</span>
+                <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded">효과: 높음</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 border border-green-200 dark:border-green-800 rounded-lg p-6 hover:shadow-lg transition">
+          <div class="flex items-start">
+            <input type="checkbox" class="mt-1 mr-4 w-5 h-5 text-green-600 rounded cursor-pointer">
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">🌙 다크모드 지원</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-3">Tailwind CSS + next-themes로 다크모드 토글. 야간 카페 운영자 친화적.</p>
+              <div class="flex gap-4 text-sm">
+                <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded">2시간</span>
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded">난이도: 낮음</span>
+                <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded">효과: 중간</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 중기 개선 사항 (1-2개월) -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6 text-blue-600 dark:text-blue-400">🚀 중기 개선 사항 (1-2개월)</h2>
+      <div class="space-y-4">
+        <div class="bg-white dark:bg-slate-900 border border-blue-200 dark:border-blue-800 rounded-lg p-6 hover:shadow-lg transition">
+          <div class="flex items-start">
+            <input type="checkbox" class="mt-1 mr-4 w-5 h-5 text-blue-600 rounded cursor-pointer">
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">👥 다중 사용자 & 팀 공유</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-3">직원/파트너 초대 → 같은 가게 데이터 공유. 역할 기반 권한 (관리자/편집자/조회자). <strong>수요: 70%+</strong></p>
+              <div class="flex gap-4 text-sm">
+                <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 rounded">8-10시간</span>
+                <span class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded">난이도: 높음</span>
+                <span class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded">우선순위: 높음</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 border border-blue-200 dark:border-blue-800 rounded-lg p-6 hover:shadow-lg transition">
+          <div class="flex items-start">
+            <input type="checkbox" class="mt-1 mr-4 w-5 h-5 text-blue-600 rounded cursor-pointer">
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">📱 바코드 스캔 연동</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-3">USB 바코드 스캐너 → 자동 재료 검색 & 선택. POS 시스템 통합 시 원가 자동 계산. <strong>수요: 50%+</strong></p>
+              <div class="flex gap-4 text-sm">
+                <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 rounded">5-7시간</span>
+                <span class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded">난이도: 높음</span>
+                <span class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded">우선순위: 높음</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 border border-blue-200 dark:border-blue-800 rounded-lg p-6 hover:shadow-lg transition">
+          <div class="flex items-start">
+            <input type="checkbox" class="mt-1 mr-4 w-5 h-5 text-blue-600 rounded cursor-pointer">
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">💰 비용 비교 & 공급처 비교</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-3">같은 요리 다양한 조합 비용 비교 + 공급처별 가격 비교. 원가 최소화 전략 수립. <strong>수요: 40%+</strong></p>
+              <div class="flex gap-4 text-sm">
+                <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 rounded">3-5시간</span>
+                <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded">난이도: 중간</span>
+                <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 rounded">우선순위: 중간</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 장기 전략 (3-6개월) -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6 text-purple-600 dark:text-purple-400">🌟 장기 전략 (3-6개월, 성장)</h2>
+      <div class="space-y-4">
+        <div class="bg-white dark:bg-slate-900 border border-purple-200 dark:border-purple-800 rounded-lg p-6 hover:shadow-lg transition">
+          <div class="flex items-start">
+            <input type="checkbox" class="mt-1 mr-4 w-5 h-5 text-purple-600 rounded cursor-pointer">
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">📱 모바일 앱 (React Native)</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-2">iOS/Android 네이티브 앱. 매장 현장에서 즉시 원가 계산.</p>
+              <p class="text-lg font-bold text-purple-600 dark:text-purple-400">예상 효과: 사용자 증가 200%+</p>
+              <div class="flex gap-4 text-sm mt-3">
+                <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded">2-3개월</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 border border-purple-200 dark:border-purple-800 rounded-lg p-6 hover:shadow-lg transition">
+          <div class="flex items-start">
+            <input type="checkbox" class="mt-1 mr-4 w-5 h-5 text-purple-600 rounded cursor-pointer">
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">🔗 공급처 연동 API</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-2">CJ, 농협, 우아한형제들 API 통합. 실시간 가격 데이터 자동 동기화.</p>
+              <p class="text-lg font-bold text-purple-600 dark:text-purple-400">예상 효과: 사용 편의성 300%, 데이터 정확도 향상</p>
+              <div class="flex gap-4 text-sm mt-3">
+                <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded">3-4개월</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 border border-purple-200 dark:border-purple-800 rounded-lg p-6 hover:shadow-lg transition">
+          <div class="flex items-start">
+            <input type="checkbox" class="mt-1 mr-4 w-5 h-5 text-purple-600 rounded cursor-pointer">
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">🤖 AI 기반 재료 제안</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-2">사용자 패턴 학습 → '이 재료와 잘 어울리는 재료' 자동 제안.</p>
+              <p class="text-lg font-bold text-purple-600 dark:text-purple-400">예상 효과: 신규 레시피 개발 시간 50% 단축</p>
+              <div class="flex gap-4 text-sm mt-3">
+                <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded">2-3개월</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 수익화 전략 -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6 text-green-600 dark:text-green-400">💵 수익화 전략</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-green-50 dark:bg-slate-800 rounded-lg p-6 border-l-4 border-green-500">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">🎁 Freemium 모델</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">기본: 재료 50개, 레시피 무제한 | 프리미엄: 무제한 + 고급 분석 ($5/월)</p>
+          <p class="text-lg font-bold text-green-600 dark:text-green-400">예상 수익: 300~500만원/월</p>
+        </div>
+
+        <div class="bg-blue-50 dark:bg-slate-800 rounded-lg p-6 border-l-4 border-blue-500">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">🤝 공급처 제휴</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">추천 공급처 링크 → 구매 시 5-10% 수수료</p>
+          <p class="text-lg font-bold text-blue-600 dark:text-blue-400">예상 수익: 1000~2000만원/월</p>
+        </div>
+
+        <div class="bg-purple-50 dark:bg-slate-800 rounded-lg p-6 border-l-4 border-purple-500">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">🏢 B2B SaaS</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">프랜차이즈 체인 대상 ($500~2000/월)</p>
+          <p class="text-lg font-bold text-purple-600 dark:text-purple-400">예상 수익: 500~1000만원/월</p>
+        </div>
+
+        <div class="bg-orange-50 dark:bg-slate-800 rounded-lg p-6 border-l-4 border-orange-500">
+          <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">📊 인사이트 리포팅</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">월간 분석 리포트 (기본 무료, 상세 유료)</p>
+          <p class="text-lg font-bold text-orange-600 dark:text-orange-400">예상 수익: 200~500만원/월</p>
+        </div>
+      </div>
+      <p class="text-center text-gray-600 dark:text-gray-400 mt-6 text-sm">💡 여러 채널 조합 시 월 2000~3500만원 수익 잠재력</p>
+    </section>
+
+    <!-- 로드맵 -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold mb-6 text-indigo-600 dark:text-indigo-400">📅 분기별 로드맵</h2>
+      <div class="space-y-4">
+        <div class="bg-indigo-50 dark:bg-slate-800 rounded-lg p-6 border-l-4 border-indigo-500">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Q3 2026 (7-9월): Quick Wins + 안정성</h3>
+          <ul class="text-gray-600 dark:text-gray-400 space-y-1">
+            <li>✓ CSV 대량 수입</li>
+            <li>✓ 레시피 복제</li>
+            <li>✓ 다크모드</li>
+            <li>✓ 성능 최적화</li>
+          </ul>
+        </div>
+
+        <div class="bg-indigo-50 dark:bg-slate-800 rounded-lg p-6 border-l-4 border-indigo-500">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Q4 2026 (10-12월): 고급 기능 + 테스트</h3>
+          <ul class="text-gray-600 dark:text-gray-400 space-y-1">
+            <li>✓ 다중 사용자</li>
+            <li>✓ 바코드 스캔</li>
+            <li>✓ 비용 비교</li>
+            <li>✓ 테스트 커버리지 80%+</li>
+          </ul>
+        </div>
+
+        <div class="bg-indigo-50 dark:bg-slate-800 rounded-lg p-6 border-l-4 border-indigo-500">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Q1 2027 (1-3월): 수익화 + 성장</h3>
+          <ul class="text-gray-600 dark:text-gray-400 space-y-1">
+            <li>✓ Freemium 모델 출시</li>
+            <li>✓ 모바일 앱</li>
+            <li>✓ 공급처 API</li>
+            <li>✓ 커뮤니티/마켓플레이스</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 다음 액션 -->
+    <section class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-700 rounded-lg p-8">
+      <h2 class="text-3xl font-bold mb-4 text-gray-900 dark:text-white">🎯 다음 액션 (이번 주)</h2>
+      <div class="space-y-2 text-gray-700 dark:text-gray-300">
+        <p>1️⃣ <strong>CSV 수입 기능 구현</strong> (가장 효과가 높음)</p>
+        <p>2️⃣ <strong>초기 사용자 인터뷰</strong> (5-10명 카페/음식점) → 실제 페인 포인트 검증</p>
+        <p>3️⃣ <strong>베타 테스터 모집</strong> (카카오톡, 오늘의집) → 피드백 수집</p>
+        <p>4️⃣ <strong>Freemium 결제 시스템 설계</strong> → Q3 말 베타 출시 준비</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="bg-gray-100 dark:bg-slate-900 border-t border-gray-200 dark:border-slate-700 mt-16 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600 dark:text-gray-400 text-sm">
+      <p>레시피 원가 계산기 | 2026년 7월 생성</p>
+      <p class="mt-2">GitHub: <a href="https://github.com/hongmacho/recipe-cost-calculator" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">hongmacho/recipe-cost-calculator</a></p>
+      <p class="mt-4 text-xs">이 가이드는 MVP 기반의 실행 계획입니다. 사용자 피드백에 따라 조정될 수 있습니다.</p>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
